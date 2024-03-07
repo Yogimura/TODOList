@@ -27,12 +27,15 @@ namespace TODOList2
         private void DelBTN_Click(object sender, EventArgs e)
         {
             Tasks tarea = TaskList.SelectedItem as Tasks;
-            DialogResult sl = MessageBox.Show("Quiere eliminar la tarea " + tarea.ToString(), "Advertencia", MessageBoxButtons.OKCancel);
-
-            if (sl == DialogResult.OK)
+            if (tarea != null)
             {
-                SQL.sqlqueue.Enqueue("delete from tasks where ID = " + tarea.id);
-                TaskList.Items.Remove(TaskList.SelectedItem);
+                DialogResult sl = MessageBox.Show("Quiere eliminar la tarea " + tarea.ToString(), "Advertencia", MessageBoxButtons.OKCancel);
+
+                if (sl == DialogResult.OK)
+                {
+                    SQL.sqlqueue.Enqueue("delete from tasks where ID = " + tarea.id);
+                    TaskList.Items.Remove(TaskList.SelectedItem);
+                }
             }
             
         }
